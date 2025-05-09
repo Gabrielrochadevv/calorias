@@ -1,5 +1,7 @@
 package br.com.fiap.calorias.controller;
 
+import br.com.fiap.calorias.dto.UsuarioCadastroDto;
+import br.com.fiap.calorias.dto.UsuarioExibicaoDto;
 import br.com.fiap.calorias.model.Usuario;
 import br.com.fiap.calorias.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +19,8 @@ public class UsuarioController {
 
     @PostMapping("/usuarios")
     @ResponseStatus(HttpStatus.CREATED)
-    public Usuario salvar(@RequestBody Usuario usuario) {
-        return usuarioService.salvarUsuario(usuario);
+    public UsuarioExibicaoDto salvar(@RequestBody UsuarioCadastroDto usuarioCadastroDto) {
+        return usuarioService.salvarUsuario(usuarioCadastroDto);
     }
 
     @GetMapping("/usuarios")
@@ -28,7 +30,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/usuarios/{usuarioId}")
-    public Usuario buscarPorId(@PathVariable Long usuarioId) {
+    public UsuarioExibicaoDto buscarPorId(@PathVariable Long usuarioId) {
         return usuarioService.buscarPorId(usuarioId);
     }
 

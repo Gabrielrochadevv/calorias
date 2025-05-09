@@ -1,3 +1,7 @@
+-- conexao com o flyway
+-- flyway inativo
+--criei a tabela manualmente
+
 CREATE SEQUENCE SEQ_USUARIOS
     START WITH 1
     INCREMENT BY 1 NOCACHE

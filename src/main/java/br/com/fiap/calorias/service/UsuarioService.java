@@ -1,7 +1,10 @@
 package br.com.fiap.calorias.service;
 
+import br.com.fiap.calorias.dto.UsuarioCadastroDto;
+import br.com.fiap.calorias.dto.UsuarioExibicaoDto;
 import br.com.fiap.calorias.model.Usuario;
 import br.com.fiap.calorias.repository.UsuarioRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +17,18 @@ public class UsuarioService {
     @Autowired //injeta no usuarioService o repositorio já instanciado
     private UsuarioRepository usuarioRepository;
 
-    public Usuario salvarUsuario(Usuario usuario){
-        return usuarioRepository.save(usuario);
+    public UsuarioExibicaoDto salvarUsuario(UsuarioCadastroDto usuarioCadastroDto){
+        Usuario usuario = new Usuario();
+        BeanUtils.copyProperties(usuarioCadastroDto, usuario);
+        return new UsuarioExibicaoDto(usuarioRepository.save(usuario));
     }
 
-    public Usuario buscarPorId(Long id){
+    public UsuarioExibicaoDto buscarPorId(Long id){
         Optional<Usuario> usuarioOptional =
                 usuarioRepository.findById(id);
 
         if (usuarioOptional.isPresent()){
-            return usuarioOptional.get();
+            return new UsuarioExibicaoDto(usuarioOptional.get());
         } else {
             throw new RuntimeException("Usuário não existe!");
         }
