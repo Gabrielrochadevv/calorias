@@ -32,8 +32,7 @@ public class AlimentoController {
     }
 
     @GetMapping("/alimentos/{alimentoId}")
-    public ResponseEntity<AlimentoExibicaoDto> buscarPorId(
-            @PathVariable Long alimentoId) {
+    public ResponseEntity<AlimentoExibicaoDto> buscarPorId( @PathVariable Long alimentoId) {
         try {
             return ResponseEntity
                     .ok(alimentoService.buscarPorId(alimentoId));
